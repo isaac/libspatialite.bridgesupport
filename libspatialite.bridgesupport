@@ -3185,10 +3185,6 @@
 <opaque name='sqlite3_pcache' type='^{sqlite3_pcache=}'/>
 <opaque name='sqlite3_stmt' type='^{sqlite3_stmt=}'/>
 <opaque name='sqlite3_value' type='^{sqlite3_value=}'/>
-<constant declared_type='int' name='gaiaWFScatalogPtr' type='i'/>
-<constant declared_type='int' name='gaiaWFScolumnPtr' type='i'/>
-<constant declared_type='int' name='gaiaWFSitemPtr' type='i'/>
-<constant declared_type='int' name='gaiaWFSschemaPtr' type='i'/>
 <constant declared_type='char*' name='sqlite3_data_directory' type='*'/>
 <constant declared_type='char*' name='sqlite3_temp_directory' type='*'/>
 <constant const='true' declared_type='char*' name='sqlite3_version' type='^c'/>
@@ -3827,7 +3823,7 @@
 <enum name='VRTTXT_NULL' value='4'/>
 <enum name='VRTTXT_TEXT' value='1'/>
 <function name='check_all_geometry_columns'>
-<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='sqlite' type='^i'/>
 <arg const='true' declared_type='char*' name='output_dir' type='*'/>
 <arg declared_type='int*' name='n_invalids' type='^i'/>
 <arg declared_type='char**' name='err_msg' type='^*'/>
@@ -3835,20 +3831,20 @@
 </function>
 <function name='check_all_geometry_columns_r'>
 <arg const='true' declared_type='void*' name='p_cache' type='^v'/>
-<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='sqlite' type='^i'/>
 <arg const='true' declared_type='char*' name='output_dir' type='*'/>
 <arg declared_type='int*' name='n_invalids' type='^i'/>
 <arg declared_type='char**' name='err_msg' type='^*'/>
 <retval declared_type='int' type='i'/>
 </function>
 <function name='check_duplicated_rows'>
-<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='sqlite' type='^i'/>
 <arg declared_type='char*' name='table' type='*'/>
 <arg declared_type='int*' name='dupl_count' type='^i'/>
 <retval declared_type='void' type='v'/>
 </function>
 <function name='check_geometry_column'>
-<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='sqlite' type='^i'/>
 <arg const='true' declared_type='char*' name='table' type='*'/>
 <arg const='true' declared_type='char*' name='geom' type='*'/>
 <arg const='true' declared_type='char*' name='report_path' type='*'/>
@@ -3859,7 +3855,7 @@
 </function>
 <function name='check_geometry_column_r'>
 <arg const='true' declared_type='void*' name='p_cache' type='^v'/>
-<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='sqlite' type='^i'/>
 <arg const='true' declared_type='char*' name='table' type='*'/>
 <arg const='true' declared_type='char*' name='geom' type='*'/>
 <arg const='true' declared_type='char*' name='report_path' type='*'/>
@@ -3868,12 +3864,31 @@
 <arg declared_type='char**' name='err_msg' type='^*'/>
 <retval declared_type='int' type='i'/>
 </function>
+<function name='create_wfs_catalog'>
+<arg const='true' declared_type='char*' name='path_or_url' type='*'/>
+<arg declared_type='char**' name='err_msg' type='^*'/>
+<retval declared_type='gaiaWFScatalogPtr' type='^{gaia_wfs_catalog=}'/>
+</function>
+<function name='create_wfs_schema'>
+<arg const='true' declared_type='char*' name='path_or_url' type='*'/>
+<arg const='true' declared_type='char*' name='layer_name' type='*'/>
+<arg declared_type='char**' name='err_msg' type='^*'/>
+<retval declared_type='gaiaWFSschemaPtr' type='^{gaia_wfs_schema=}'/>
+</function>
+<function name='destroy_wfs_catalog'>
+<arg declared_type='gaiaWFScatalogPtr' name='handle' type='^{gaia_wfs_catalog=}'/>
+<retval declared_type='void' type='v'/>
+</function>
+<function name='destroy_wfs_schema'>
+<arg declared_type='gaiaWFSschemaPtr' name='handle' type='^{gaia_wfs_schema=}'/>
+<retval declared_type='void' type='v'/>
+</function>
 <function name='disable_tiny_point'>
 <arg const='true' declared_type='void*' name='ptr' type='^v'/>
 <retval declared_type='void' type='v'/>
 </function>
 <function name='dump_dbf'>
-<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='sqlite' type='^i'/>
 <arg declared_type='char*' name='table' type='*'/>
 <arg declared_type='char*' name='dbf_path' type='*'/>
 <arg declared_type='char*' name='charset' type='*'/>
@@ -3881,7 +3896,7 @@
 <retval declared_type='int' type='i'/>
 </function>
 <function name='dump_dbf_ex'>
-<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='sqlite' type='^i'/>
 <arg declared_type='char*' name='table' type='*'/>
 <arg declared_type='char*' name='dbf_path' type='*'/>
 <arg declared_type='char*' name='charset' type='*'/>
@@ -3890,7 +3905,7 @@
 <retval declared_type='int' type='i'/>
 </function>
 <function name='dump_dbf_ex2'>
-<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='sqlite' type='^i'/>
 <arg declared_type='char*' name='table' type='*'/>
 <arg declared_type='char*' name='dbf_path' type='*'/>
 <arg declared_type='char*' name='charset' type='*'/>
@@ -3900,7 +3915,7 @@
 <retval declared_type='int' type='i'/>
 </function>
 <function name='dump_geojson'>
-<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='sqlite' type='^i'/>
 <arg declared_type='char*' name='table' type='*'/>
 <arg declared_type='char*' name='geom_col' type='*'/>
 <arg declared_type='char*' name='outfile_path' type='*'/>
@@ -3909,7 +3924,7 @@
 <retval declared_type='int' type='i'/>
 </function>
 <function name='dump_geojson_ex'>
-<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='sqlite' type='^i'/>
 <arg declared_type='char*' name='table' type='*'/>
 <arg declared_type='char*' name='geom_col' type='*'/>
 <arg declared_type='char*' name='outfile_path' type='*'/>
@@ -3919,7 +3934,7 @@
 <retval declared_type='int' type='i'/>
 </function>
 <function name='dump_kml'>
-<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='sqlite' type='^i'/>
 <arg declared_type='char*' name='table' type='*'/>
 <arg declared_type='char*' name='geom_col' type='*'/>
 <arg declared_type='char*' name='kml_path' type='*'/>
@@ -3929,7 +3944,7 @@
 <retval declared_type='int' type='i'/>
 </function>
 <function name='dump_kml_ex'>
-<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='sqlite' type='^i'/>
 <arg declared_type='char*' name='table' type='*'/>
 <arg declared_type='char*' name='geom_col' type='*'/>
 <arg declared_type='char*' name='kml_path' type='*'/>
@@ -3940,7 +3955,7 @@
 <retval declared_type='int' type='i'/>
 </function>
 <function name='dump_shapefile'>
-<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='sqlite' type='^i'/>
 <arg declared_type='char*' name='table' type='*'/>
 <arg declared_type='char*' name='column' type='*'/>
 <arg declared_type='char*' name='shp_path' type='*'/>
@@ -3952,7 +3967,7 @@
 <retval declared_type='int' type='i'/>
 </function>
 <function name='dump_shapefile_ex'>
-<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='sqlite' type='^i'/>
 <arg declared_type='char*' name='table' type='*'/>
 <arg declared_type='char*' name='column' type='*'/>
 <arg declared_type='char*' name='shp_path' type='*'/>
@@ -3965,7 +3980,7 @@
 <retval declared_type='int' type='i'/>
 </function>
 <function name='elementary_geometries'>
-<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='sqlite' type='^i'/>
 <arg declared_type='char*' name='inTable' type='*'/>
 <arg declared_type='char*' name='geometry' type='*'/>
 <arg declared_type='char*' name='outTable' type='*'/>
@@ -3974,7 +3989,7 @@
 <retval declared_type='void' type='v'/>
 </function>
 <function name='elementary_geometries_ex'>
-<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='sqlite' type='^i'/>
 <arg declared_type='char*' name='inTable' type='*'/>
 <arg declared_type='char*' name='geometry' type='*'/>
 <arg declared_type='char*' name='outTable' type='*'/>
@@ -3984,7 +3999,7 @@
 <retval declared_type='void' type='v'/>
 </function>
 <function name='elementary_geometries_ex2'>
-<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='sqlite' type='^i'/>
 <arg declared_type='char*' name='inTable' type='*'/>
 <arg declared_type='char*' name='geometry' type='*'/>
 <arg declared_type='char*' name='outTable' type='*'/>
@@ -3995,7 +4010,7 @@
 <retval declared_type='void' type='v'/>
 </function>
 <function name='elementary_geometries_ex3'>
-<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='sqlite' type='^i'/>
 <arg declared_type='char*' name='inTable' type='*'/>
 <arg declared_type='char*' name='geometry' type='*'/>
 <arg declared_type='char*' name='outTable' type='*'/>
@@ -4197,19 +4212,19 @@
 </function>
 <function name='gaiaAddEdgeModFace'>
 <arg declared_type='GaiaTopologyAccessorPtr' name='ptr' type='^{gaia_topology_accessor=}'/>
-<arg declared_type='int' name='start_node' type='i'/>
-<arg declared_type='int' name='end_node' type='i'/>
-<arg declared_type='int' name='ln' type='i'/>
+<arg declared_type='sqlite3_int64' name='start_node' type='q'/>
+<arg declared_type='sqlite3_int64' name='end_node' type='q'/>
+<arg declared_type='gaiaLinestringPtr' name='ln' type='^{gaiaLinestringStruct=i^dddddi^{gaiaLinestringStruct}}'/>
 <arg declared_type='int' name='skip_checks' type='i'/>
-<retval declared_type='int' type='i'/>
+<retval declared_type='sqlite3_int64' type='q'/>
 </function>
 <function name='gaiaAddEdgeNewFaces'>
 <arg declared_type='GaiaTopologyAccessorPtr' name='ptr' type='^{gaia_topology_accessor=}'/>
-<arg declared_type='int' name='start_node' type='i'/>
-<arg declared_type='int' name='end_node' type='i'/>
-<arg declared_type='int' name='ln' type='i'/>
+<arg declared_type='sqlite3_int64' name='start_node' type='q'/>
+<arg declared_type='sqlite3_int64' name='end_node' type='q'/>
+<arg declared_type='gaiaLinestringPtr' name='ln' type='^{gaiaLinestringStruct=i^dddddi^{gaiaLinestringStruct}}'/>
 <arg declared_type='int' name='skip_checks' type='i'/>
-<retval declared_type='int' type='i'/>
+<retval declared_type='sqlite3_int64' type='q'/>
 </function>
 <function name='gaiaAddInteriorRing'>
 <arg declared_type='gaiaPolygonPtr' name='p' type='^{gaiaPolygonStruct=^{gaiaRingStruct}i^{gaiaRingStruct}iddddi^{gaiaPolygonStruct}}'/>
@@ -4219,22 +4234,22 @@
 </function>
 <function name='gaiaAddIsoEdge'>
 <arg declared_type='GaiaTopologyAccessorPtr' name='ptr' type='^{gaia_topology_accessor=}'/>
-<arg declared_type='int' name='start_node' type='i'/>
-<arg declared_type='int' name='end_node' type='i'/>
-<arg declared_type='int' name='ln' type='i'/>
-<retval declared_type='int' type='i'/>
+<arg declared_type='sqlite3_int64' name='start_node' type='q'/>
+<arg declared_type='sqlite3_int64' name='end_node' type='q'/>
+<arg declared_type='gaiaLinestringPtr' name='ln' type='^{gaiaLinestringStruct=i^dddddi^{gaiaLinestringStruct}}'/>
+<retval declared_type='sqlite3_int64' type='q'/>
 </function>
 <function name='gaiaAddIsoNetNode'>
 <arg declared_type='GaiaNetworkAccessorPtr' name='ptr' type='^{gaia_network_accessor=}'/>
-<arg declared_type='PointPtr' name='pt' type='^{Point=ss}'/>
-<retval declared_type='int' type='i'/>
+<arg declared_type='gaiaPointPtr' name='pt' type='^{gaiaPointStruct=ddddi^{gaiaPointStruct}^{gaiaPointStruct}}'/>
+<retval declared_type='sqlite3_int64' type='q'/>
 </function>
 <function name='gaiaAddIsoNode'>
 <arg declared_type='GaiaTopologyAccessorPtr' name='ptr' type='^{gaia_topology_accessor=}'/>
-<arg declared_type='int' name='face' type='i'/>
-<arg declared_type='PointPtr' name='pt' type='^{Point=ss}'/>
+<arg declared_type='sqlite3_int64' name='face' type='q'/>
+<arg declared_type='gaiaPointPtr' name='pt' type='^{gaiaPointStruct=ddddi^{gaiaPointStruct}^{gaiaPointStruct}}'/>
 <arg declared_type='int' name='skip_checks' type='i'/>
-<retval declared_type='int' type='i'/>
+<retval declared_type='sqlite3_int64' type='q'/>
 </function>
 <function name='gaiaAddLinestringToGeomColl'>
 <arg declared_type='gaiaGeomCollPtr' name='p' type='^{gaiaGeomCollStruct=icc*LL^{gaiaPointStruct}^{gaiaPointStruct}^{gaiaLinestringStruct}^{gaiaLinestringStruct}^{gaiaPolygonStruct}^{gaiaPolygonStruct}ddddii^{gaiaGeomCollStruct}}' type64='^{gaiaGeomCollStruct=icc*QQ^{gaiaPointStruct}^{gaiaPointStruct}^{gaiaLinestringStruct}^{gaiaLinestringStruct}^{gaiaPolygonStruct}^{gaiaPolygonStruct}ddddii^{gaiaGeomCollStruct}}'/>
@@ -4243,10 +4258,10 @@
 </function>
 <function name='gaiaAddLink'>
 <arg declared_type='GaiaNetworkAccessorPtr' name='ptr' type='^{gaia_network_accessor=}'/>
-<arg declared_type='int' name='start_node' type='i'/>
-<arg declared_type='int' name='end_node' type='i'/>
-<arg declared_type='int' name='ln' type='i'/>
-<retval declared_type='int' type='i'/>
+<arg declared_type='sqlite3_int64' name='start_node' type='q'/>
+<arg declared_type='sqlite3_int64' name='end_node' type='q'/>
+<arg declared_type='gaiaLinestringPtr' name='ln' type='^{gaiaLinestringStruct=i^dddddi^{gaiaLinestringStruct}}'/>
+<retval declared_type='sqlite3_int64' type='q'/>
 </function>
 <function name='gaiaAddMeasure'>
 <arg declared_type='gaiaGeomCollPtr' name='geom' type='^{gaiaGeomCollStruct=icc*LL^{gaiaPointStruct}^{gaiaPointStruct}^{gaiaLinestringStruct}^{gaiaLinestringStruct}^{gaiaPolygonStruct}^{gaiaPolygonStruct}ddddii^{gaiaGeomCollStruct}}' type64='^{gaiaGeomCollStruct=icc*QQ^{gaiaPointStruct}^{gaiaPointStruct}^{gaiaLinestringStruct}^{gaiaLinestringStruct}^{gaiaPolygonStruct}^{gaiaPolygonStruct}ddddii^{gaiaGeomCollStruct}}'/>
@@ -4532,14 +4547,14 @@
 </function>
 <function name='gaiaChangeEdgeGeom'>
 <arg declared_type='GaiaTopologyAccessorPtr' name='ptr' type='^{gaia_topology_accessor=}'/>
-<arg declared_type='int' name='edge_id' type='i'/>
-<arg declared_type='int' name='ln' type='i'/>
+<arg declared_type='sqlite3_int64' name='edge_id' type='q'/>
+<arg declared_type='gaiaLinestringPtr' name='ln' type='^{gaiaLinestringStruct=i^dddddi^{gaiaLinestringStruct}}'/>
 <retval declared_type='int' type='i'/>
 </function>
 <function name='gaiaChangeLinkGeom'>
 <arg declared_type='GaiaNetworkAccessorPtr' name='ptr' type='^{gaia_network_accessor=}'/>
-<arg declared_type='int' name='link_id' type='i'/>
-<arg declared_type='int' name='ln' type='i'/>
+<arg declared_type='sqlite3_int64' name='link_id' type='q'/>
+<arg declared_type='gaiaLinestringPtr' name='ln' type='^{gaiaLinestringStruct=i^dddddi^{gaiaLinestringStruct}}'/>
 <retval declared_type='int' type='i'/>
 </function>
 <function name='gaiaCheckClockwise'>
@@ -4729,7 +4744,7 @@
 <retval declared_type='void*' type='^v'/>
 </function>
 <function name='gaiaCreateMetaCatalogTables'>
-<arg declared_type='sqlite3*' name='handle' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='handle' type='^i'/>
 <retval declared_type='int' type='i'/>
 </function>
 <function name='gaiaCreatePolygon'>
@@ -4759,7 +4774,7 @@
 <retval declared_type='gaiaGeomCollPtr' type='^{gaiaGeomCollStruct=icc*LL^{gaiaPointStruct}^{gaiaPointStruct}^{gaiaLinestringStruct}^{gaiaLinestringStruct}^{gaiaPolygonStruct}^{gaiaPolygonStruct}ddddii^{gaiaGeomCollStruct}}' type64='^{gaiaGeomCollStruct=icc*QQ^{gaiaPointStruct}^{gaiaPointStruct}^{gaiaLinestringStruct}^{gaiaLinestringStruct}^{gaiaPolygonStruct}^{gaiaPolygonStruct}ddddii^{gaiaGeomCollStruct}}'/>
 </function>
 <function name='gaiaCutter'>
-<arg declared_type='sqlite3*' name='db_handle' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='db_handle' type='^i'/>
 <arg const='true' declared_type='void*' name='cache' type='^v'/>
 <arg const='true' declared_type='char*' name='in_db_prefix' type='*'/>
 <arg const='true' declared_type='char*' name='input_table' type='*'/>
@@ -4839,25 +4854,25 @@
 <retval declared_type='gaiaGeomCollPtr' type='^{gaiaGeomCollStruct=icc*LL^{gaiaPointStruct}^{gaiaPointStruct}^{gaiaLinestringStruct}^{gaiaLinestringStruct}^{gaiaPolygonStruct}^{gaiaPolygonStruct}ddddii^{gaiaGeomCollStruct}}' type64='^{gaiaGeomCollStruct=icc*QQ^{gaiaPointStruct}^{gaiaPointStruct}^{gaiaLinestringStruct}^{gaiaLinestringStruct}^{gaiaPolygonStruct}^{gaiaPolygonStruct}ddddii^{gaiaGeomCollStruct}}'/>
 </function>
 <function name='gaiaDropTable'>
-<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='sqlite' type='^i'/>
 <arg const='true' declared_type='char*' name='table' type='*'/>
 <retval declared_type='int' type='i'/>
 </function>
 <function name='gaiaDropTableEx'>
-<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='sqlite' type='^i'/>
 <arg const='true' declared_type='char*' name='prefix' type='*'/>
 <arg const='true' declared_type='char*' name='table' type='*'/>
 <retval declared_type='int' type='i'/>
 </function>
 <function name='gaiaDropTableEx2'>
-<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='sqlite' type='^i'/>
 <arg const='true' declared_type='char*' name='prefix' type='*'/>
 <arg const='true' declared_type='char*' name='table' type='*'/>
 <arg declared_type='int' name='transaction' type='i'/>
 <retval declared_type='int' type='i'/>
 </function>
 <function name='gaiaDropTableEx3'>
-<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='sqlite' type='^i'/>
 <arg const='true' declared_type='char*' name='prefix' type='*'/>
 <arg const='true' declared_type='char*' name='table' type='*'/>
 <arg declared_type='int' name='transaction' type='i'/>
@@ -5417,9 +5432,9 @@
 <retval declared_type='char*' type='*'/>
 </function>
 <function name='gaiaGPKG2Spatialite'>
-<arg declared_type='sqlite3*' name='handle_in' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='handle_in' type='^i'/>
 <arg const='true' declared_type='char*' name='gpkg_in_path' type='*'/>
-<arg declared_type='sqlite3*' name='handle_out' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='handle_out' type='^i'/>
 <arg const='true' declared_type='char*' name='splite_out_path' type='*'/>
 <retval declared_type='int' type='i'/>
 </function>
@@ -5833,14 +5848,14 @@
 </function>
 <function name='gaiaGetEdgeByPoint'>
 <arg declared_type='GaiaTopologyAccessorPtr' name='ptr' type='^{gaia_topology_accessor=}'/>
-<arg declared_type='int' name='pt' type='i'/>
+<arg declared_type='gaiaPointPtr' name='pt' type='^{gaiaPointStruct=ddddi^{gaiaPointStruct}^{gaiaPointStruct}}'/>
 <arg declared_type='double' name='tolerance' type='d'/>
-<retval declared_type='int' type='i'/>
+<retval declared_type='sqlite3_int64' type='q'/>
 </function>
 <function name='gaiaGetEdgeSeed'>
 <arg declared_type='GaiaTopologyAccessorPtr' name='ptr' type='^{gaia_topology_accessor=}'/>
-<arg declared_type='int' name='edge' type='i'/>
-<retval declared_type='int' type='i'/>
+<arg declared_type='sqlite3_int64' name='edge' type='q'/>
+<retval declared_type='gaiaGeomCollPtr' type='^{gaiaGeomCollStruct=icc*LL^{gaiaPointStruct}^{gaiaPointStruct}^{gaiaLinestringStruct}^{gaiaLinestringStruct}^{gaiaPolygonStruct}^{gaiaPolygonStruct}ddddii^{gaiaGeomCollStruct}}' type64='^{gaiaGeomCollStruct=icc*QQ^{gaiaPointStruct}^{gaiaPointStruct}^{gaiaLinestringStruct}^{gaiaLinestringStruct}^{gaiaPolygonStruct}^{gaiaPolygonStruct}ddddii^{gaiaGeomCollStruct}}'/>
 </function>
 <function name='gaiaGetEnvelopeFromGPB'>
 <arg const='true' declared_type='unsigned char*' name='gpb' type='*'/>
@@ -5888,24 +5903,24 @@
 </function>
 <function name='gaiaGetFaceByPoint'>
 <arg declared_type='GaiaTopologyAccessorPtr' name='ptr' type='^{gaia_topology_accessor=}'/>
-<arg declared_type='int' name='pt' type='i'/>
+<arg declared_type='gaiaPointPtr' name='pt' type='^{gaiaPointStruct=ddddi^{gaiaPointStruct}^{gaiaPointStruct}}'/>
 <arg declared_type='double' name='tolerance' type='d'/>
-<retval declared_type='int' type='i'/>
+<retval declared_type='sqlite3_int64' type='q'/>
 </function>
 <function name='gaiaGetFaceEdges'>
 <arg declared_type='GaiaTopologyAccessorPtr' name='ptr' type='^{gaia_topology_accessor=}'/>
-<arg declared_type='int' name='face' type='i'/>
+<arg declared_type='sqlite3_int64' name='face' type='q'/>
 <retval declared_type='int' type='i'/>
 </function>
 <function name='gaiaGetFaceGeometry'>
 <arg declared_type='GaiaTopologyAccessorPtr' name='ptr' type='^{gaia_topology_accessor=}'/>
-<arg declared_type='int' name='face' type='i'/>
-<retval declared_type='int' type='i'/>
+<arg declared_type='sqlite3_int64' name='face' type='q'/>
+<retval declared_type='gaiaGeomCollPtr' type='^{gaiaGeomCollStruct=icc*LL^{gaiaPointStruct}^{gaiaPointStruct}^{gaiaLinestringStruct}^{gaiaLinestringStruct}^{gaiaPolygonStruct}^{gaiaPolygonStruct}ddddii^{gaiaGeomCollStruct}}' type64='^{gaiaGeomCollStruct=icc*QQ^{gaiaPointStruct}^{gaiaPointStruct}^{gaiaLinestringStruct}^{gaiaLinestringStruct}^{gaiaPolygonStruct}^{gaiaPolygonStruct}ddddii^{gaiaGeomCollStruct}}'/>
 </function>
 <function name='gaiaGetFaceSeed'>
 <arg declared_type='GaiaTopologyAccessorPtr' name='ptr' type='^{gaia_topology_accessor=}'/>
-<arg declared_type='int' name='face' type='i'/>
-<retval declared_type='int' type='i'/>
+<arg declared_type='sqlite3_int64' name='face' type='q'/>
+<retval declared_type='gaiaGeomCollPtr' type='^{gaiaGeomCollStruct=icc*LL^{gaiaPointStruct}^{gaiaPointStruct}^{gaiaLinestringStruct}^{gaiaLinestringStruct}^{gaiaPolygonStruct}^{gaiaPolygonStruct}ddddii^{gaiaGeomCollStruct}}' type64='^{gaiaGeomCollStruct=icc*QQ^{gaiaPointStruct}^{gaiaPointStruct}^{gaiaLinestringStruct}^{gaiaLinestringStruct}^{gaiaPolygonStruct}^{gaiaPolygonStruct}ddddii^{gaiaGeomCollStruct}}'/>
 </function>
 <function name='gaiaGetGeometryTypeFromGPB'>
 <arg const='true' declared_type='unsigned char*' name='gpb' type='*'/>
@@ -5948,7 +5963,7 @@
 <retval declared_type='int' type='i'/>
 </function>
 <function name='gaiaGetLayerExtent'>
-<arg declared_type='sqlite3*' name='handle' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='handle' type='^i'/>
 <arg const='true' declared_type='char*' name='table' type='*'/>
 <arg const='true' declared_type='char*' name='geometry' type='*'/>
 <arg declared_type='int' name='mode' type='i'/>
@@ -5956,14 +5971,14 @@
 </function>
 <function name='gaiaGetLinkByPoint'>
 <arg declared_type='GaiaNetworkAccessorPtr' name='ptr' type='^{gaia_network_accessor=}'/>
-<arg declared_type='PointPtr' name='pt' type='^{Point=ss}'/>
+<arg declared_type='gaiaPointPtr' name='pt' type='^{gaiaPointStruct=ddddi^{gaiaPointStruct}^{gaiaPointStruct}}'/>
 <arg declared_type='double' name='tolerance' type='d'/>
-<retval declared_type='int' type='i'/>
+<retval declared_type='sqlite3_int64' type='q'/>
 </function>
 <function name='gaiaGetLinkSeed'>
 <arg declared_type='GaiaNetworkAccessorPtr' name='ptr' type='^{gaia_network_accessor=}'/>
-<arg declared_type='int' name='link' type='i'/>
-<retval declared_type='int' type='i'/>
+<arg declared_type='sqlite3_int64' name='link' type='q'/>
+<retval declared_type='gaiaGeomCollPtr' type='^{gaiaGeomCollStruct=icc*LL^{gaiaPointStruct}^{gaiaPointStruct}^{gaiaLinestringStruct}^{gaiaLinestringStruct}^{gaiaPolygonStruct}^{gaiaPolygonStruct}ddddii^{gaiaGeomCollStruct}}' type64='^{gaiaGeomCollStruct=icc*QQ^{gaiaPointStruct}^{gaiaPointStruct}^{gaiaLinestringStruct}^{gaiaLinestringStruct}^{gaiaPolygonStruct}^{gaiaPolygonStruct}ddddii^{gaiaGeomCollStruct}}'/>
 </function>
 <function name='gaiaGetLocaleCharset'>
 <retval const='true' declared_type='char*' type='*'/>
@@ -5994,21 +6009,21 @@
 </function>
 <function name='gaiaGetNetNodeByPoint'>
 <arg declared_type='GaiaNetworkAccessorPtr' name='ptr' type='^{gaia_network_accessor=}'/>
-<arg declared_type='PointPtr' name='pt' type='^{Point=ss}'/>
+<arg declared_type='gaiaPointPtr' name='pt' type='^{gaiaPointStruct=ddddi^{gaiaPointStruct}^{gaiaPointStruct}}'/>
 <arg declared_type='double' name='tolerance' type='d'/>
-<retval declared_type='int' type='i'/>
+<retval declared_type='sqlite3_int64' type='q'/>
 </function>
 <function name='gaiaGetNetwork'>
-<arg declared_type='int*' name='handle' type='^i'/>
+<arg declared_type='sqlite3*' name='handle' type='^{sqlite3=}'/>
 <arg const='true' declared_type='void*' name='cache' type='^v'/>
 <arg const='true' declared_type='char*' name='network_name' type='*'/>
 <retval declared_type='GaiaNetworkAccessorPtr' type='^{gaia_network_accessor=}'/>
 </function>
 <function name='gaiaGetNodeByPoint'>
 <arg declared_type='GaiaTopologyAccessorPtr' name='ptr' type='^{gaia_topology_accessor=}'/>
-<arg declared_type='int' name='pt' type='i'/>
+<arg declared_type='gaiaPointPtr' name='pt' type='^{gaiaPointStruct=ddddi^{gaiaPointStruct}^{gaiaPointStruct}}'/>
 <arg declared_type='double' name='tolerance' type='d'/>
-<retval declared_type='int' type='i'/>
+<retval declared_type='sqlite3_int64' type='q'/>
 </function>
 <function name='gaiaGetPointOnSurface'>
 <arg declared_type='gaiaGeomCollPtr' name='geom' type='^{gaiaGeomCollStruct=icc*LL^{gaiaPointStruct}^{gaiaPointStruct}^{gaiaLinestringStruct}^{gaiaLinestringStruct}^{gaiaPolygonStruct}^{gaiaPolygonStruct}ddddii^{gaiaGeomCollStruct}}' type64='^{gaiaGeomCollStruct=icc*QQ^{gaiaPointStruct}^{gaiaPointStruct}^{gaiaLinestringStruct}^{gaiaLinestringStruct}^{gaiaPolygonStruct}^{gaiaPolygonStruct}ddddii^{gaiaGeomCollStruct}}'/>
@@ -6037,13 +6052,13 @@
 <retval declared_type='int' type='i'/>
 </function>
 <function name='gaiaGetTopology'>
-<arg declared_type='int*' name='handle' type='^i'/>
+<arg declared_type='sqlite3*' name='handle' type='^{sqlite3=}'/>
 <arg const='true' declared_type='void*' name='cache' type='^v'/>
 <arg const='true' declared_type='char*' name='topo_name' type='*'/>
 <retval declared_type='GaiaTopologyAccessorPtr' type='^{gaia_topology_accessor=}'/>
 </function>
 <function name='gaiaGetVectorLayersList'>
-<arg declared_type='sqlite3*' name='handle' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='handle' type='^i'/>
 <arg const='true' declared_type='char*' name='table' type='*'/>
 <arg const='true' declared_type='char*' name='geometry' type='*'/>
 <arg declared_type='int' name='mode' type='i'/>
@@ -6147,10 +6162,10 @@
 <retval declared_type='void' type='v'/>
 </function>
 <function name='gaiaInsertIntoSqlLog'>
-<arg declared_type='int*' name='sqlite' type='^i'/>
+<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
 <arg const='true' declared_type='char*' name='user_agent' type='*'/>
 <arg const='true' declared_type='char*' name='utf8Sql' type='*'/>
-<arg declared_type='int*' name='sqllog_pk' type='^i'/>
+<arg declared_type='sqlite3_int64*' name='sqllog_pk' type='^q'/>
 <retval declared_type='void' type='v'/>
 </function>
 <function name='gaiaInsertLinestringInGeomColl'>
@@ -6743,48 +6758,48 @@
 </function>
 <function name='gaiaModEdgeHeal'>
 <arg declared_type='GaiaTopologyAccessorPtr' name='ptr' type='^{gaia_topology_accessor=}'/>
-<arg declared_type='int' name='edge_id1' type='i'/>
-<arg declared_type='int' name='edge_id2' type='i'/>
-<retval declared_type='int' type='i'/>
+<arg declared_type='sqlite3_int64' name='edge_id1' type='q'/>
+<arg declared_type='sqlite3_int64' name='edge_id2' type='q'/>
+<retval declared_type='sqlite3_int64' type='q'/>
 </function>
 <function name='gaiaModEdgeSplit'>
 <arg declared_type='GaiaTopologyAccessorPtr' name='ptr' type='^{gaia_topology_accessor=}'/>
-<arg declared_type='int' name='edge' type='i'/>
-<arg declared_type='int' name='pt' type='i'/>
+<arg declared_type='sqlite3_int64' name='edge' type='q'/>
+<arg declared_type='gaiaPointPtr' name='pt' type='^{gaiaPointStruct=ddddi^{gaiaPointStruct}^{gaiaPointStruct}}'/>
 <arg declared_type='int' name='skip_checks' type='i'/>
-<retval declared_type='int' type='i'/>
+<retval declared_type='sqlite3_int64' type='q'/>
 </function>
 <function name='gaiaModGeoLinkSplit'>
 <arg declared_type='GaiaNetworkAccessorPtr' name='ptr' type='^{gaia_network_accessor=}'/>
-<arg declared_type='int' name='link' type='i'/>
-<arg declared_type='PointPtr' name='pt' type='^{Point=ss}'/>
-<retval declared_type='int' type='i'/>
+<arg declared_type='sqlite3_int64' name='link' type='q'/>
+<arg declared_type='gaiaPointPtr' name='pt' type='^{gaiaPointStruct=ddddi^{gaiaPointStruct}^{gaiaPointStruct}}'/>
+<retval declared_type='sqlite3_int64' type='q'/>
 </function>
 <function name='gaiaModLinkHeal'>
 <arg declared_type='GaiaNetworkAccessorPtr' name='ptr' type='^{gaia_network_accessor=}'/>
-<arg declared_type='int' name='link' type='i'/>
-<arg declared_type='int' name='anotherlink' type='i'/>
-<retval declared_type='int' type='i'/>
+<arg declared_type='sqlite3_int64' name='link' type='q'/>
+<arg declared_type='sqlite3_int64' name='anotherlink' type='q'/>
+<retval declared_type='sqlite3_int64' type='q'/>
 </function>
 <function name='gaiaModLogLinkSplit'>
 <arg declared_type='GaiaNetworkAccessorPtr' name='ptr' type='^{gaia_network_accessor=}'/>
-<arg declared_type='int' name='link' type='i'/>
-<retval declared_type='int' type='i'/>
+<arg declared_type='sqlite3_int64' name='link' type='q'/>
+<retval declared_type='sqlite3_int64' type='q'/>
 </function>
 <function name='gaiaMoveIsoNetNode'>
 <arg declared_type='GaiaNetworkAccessorPtr' name='ptr' type='^{gaia_network_accessor=}'/>
-<arg declared_type='int' name='node' type='i'/>
-<arg declared_type='PointPtr' name='pt' type='^{Point=ss}'/>
+<arg declared_type='sqlite3_int64' name='node' type='q'/>
+<arg declared_type='gaiaPointPtr' name='pt' type='^{gaiaPointStruct=ddddi^{gaiaPointStruct}^{gaiaPointStruct}}'/>
 <retval declared_type='int' type='i'/>
 </function>
 <function name='gaiaMoveIsoNode'>
 <arg declared_type='GaiaTopologyAccessorPtr' name='ptr' type='^{gaia_topology_accessor=}'/>
-<arg declared_type='int' name='node' type='i'/>
-<arg declared_type='int' name='pt' type='i'/>
+<arg declared_type='sqlite3_int64' name='node' type='q'/>
+<arg declared_type='gaiaPointPtr' name='pt' type='^{gaiaPointStruct=ddddi^{gaiaPointStruct}^{gaiaPointStruct}}'/>
 <retval declared_type='int' type='i'/>
 </function>
 <function name='gaiaNetworkCreate'>
-<arg declared_type='int*' name='handle' type='^i'/>
+<arg declared_type='sqlite3*' name='handle' type='^{sqlite3=}'/>
 <arg const='true' declared_type='char*' name='network_name' type='*'/>
 <arg declared_type='int' name='spatial' type='i'/>
 <arg declared_type='int' name='srid' type='i'/>
@@ -6797,7 +6812,7 @@
 <retval declared_type='void' type='v'/>
 </function>
 <function name='gaiaNetworkDrop'>
-<arg declared_type='int*' name='handle' type='^i'/>
+<arg declared_type='sqlite3*' name='handle' type='^{sqlite3=}'/>
 <arg const='true' declared_type='char*' name='network_name' type='*'/>
 <retval declared_type='int' type='i'/>
 </function>
@@ -6807,7 +6822,7 @@
 <retval declared_type='GaiaNetworkAccessorPtr' type='^{gaia_network_accessor=}'/>
 </function>
 <function name='gaiaNetworkFromDBMS'>
-<arg declared_type='int*' name='handle' type='^i'/>
+<arg declared_type='sqlite3*' name='handle' type='^{sqlite3=}'/>
 <arg const='true' declared_type='void*' name='cache' type='^v'/>
 <arg const='true' declared_type='char*' name='network_name' type='*'/>
 <retval declared_type='GaiaNetworkAccessorPtr' type='^{gaia_network_accessor=}'/>
@@ -6818,33 +6833,33 @@
 </function>
 <function name='gaiaNewEdgeHeal'>
 <arg declared_type='GaiaTopologyAccessorPtr' name='ptr' type='^{gaia_topology_accessor=}'/>
-<arg declared_type='int' name='edge_id1' type='i'/>
-<arg declared_type='int' name='edge_id2' type='i'/>
-<retval declared_type='int' type='i'/>
+<arg declared_type='sqlite3_int64' name='edge_id1' type='q'/>
+<arg declared_type='sqlite3_int64' name='edge_id2' type='q'/>
+<retval declared_type='sqlite3_int64' type='q'/>
 </function>
 <function name='gaiaNewEdgesSplit'>
 <arg declared_type='GaiaTopologyAccessorPtr' name='ptr' type='^{gaia_topology_accessor=}'/>
-<arg declared_type='int' name='edge' type='i'/>
-<arg declared_type='int' name='pt' type='i'/>
+<arg declared_type='sqlite3_int64' name='edge' type='q'/>
+<arg declared_type='gaiaPointPtr' name='pt' type='^{gaiaPointStruct=ddddi^{gaiaPointStruct}^{gaiaPointStruct}}'/>
 <arg declared_type='int' name='skip_checks' type='i'/>
-<retval declared_type='int' type='i'/>
+<retval declared_type='sqlite3_int64' type='q'/>
 </function>
 <function name='gaiaNewGeoLinkSplit'>
 <arg declared_type='GaiaNetworkAccessorPtr' name='ptr' type='^{gaia_network_accessor=}'/>
-<arg declared_type='int' name='link' type='i'/>
-<arg declared_type='PointPtr' name='pt' type='^{Point=ss}'/>
-<retval declared_type='int' type='i'/>
+<arg declared_type='sqlite3_int64' name='link' type='q'/>
+<arg declared_type='gaiaPointPtr' name='pt' type='^{gaiaPointStruct=ddddi^{gaiaPointStruct}^{gaiaPointStruct}}'/>
+<retval declared_type='sqlite3_int64' type='q'/>
 </function>
 <function name='gaiaNewLinkHeal'>
 <arg declared_type='GaiaNetworkAccessorPtr' name='ptr' type='^{gaia_network_accessor=}'/>
-<arg declared_type='int' name='link' type='i'/>
-<arg declared_type='int' name='anotherlink' type='i'/>
-<retval declared_type='int' type='i'/>
+<arg declared_type='sqlite3_int64' name='link' type='q'/>
+<arg declared_type='sqlite3_int64' name='anotherlink' type='q'/>
+<retval declared_type='sqlite3_int64' type='q'/>
 </function>
 <function name='gaiaNewLogLinkSplit'>
 <arg declared_type='GaiaNetworkAccessorPtr' name='ptr' type='^{gaia_network_accessor=}'/>
-<arg declared_type='int' name='link' type='i'/>
-<retval declared_type='int' type='i'/>
+<arg declared_type='sqlite3_int64' name='link' type='q'/>
+<retval declared_type='sqlite3_int64' type='q'/>
 </function>
 <function name='gaiaNodeLines'>
 <arg const='true' declared_type='void*' name='p_cache' type='^v'/>
@@ -7105,10 +7120,10 @@
 <retval declared_type='int' type='i'/>
 </function>
 <function name='gaiaPolynomialTransformGeometry'>
-<arg declared_type='int' name='geom' type='i'/>
+<arg declared_type='gaiaGeomCollPtr' name='geom' type='^{gaiaGeomCollStruct=icc*LL^{gaiaPointStruct}^{gaiaPointStruct}^{gaiaLinestringStruct}^{gaiaLinestringStruct}^{gaiaPolygonStruct}^{gaiaPolygonStruct}ddddii^{gaiaGeomCollStruct}}' type64='^{gaiaGeomCollStruct=icc*QQ^{gaiaPointStruct}^{gaiaPointStruct}^{gaiaLinestringStruct}^{gaiaLinestringStruct}^{gaiaPolygonStruct}^{gaiaPolygonStruct}ddddii^{gaiaGeomCollStruct}}'/>
 <arg const='true' declared_type='unsigned char*' name='blob' type='*'/>
 <arg declared_type='int' name='blob_sz' type='i'/>
-<retval declared_type='int' type='i'/>
+<retval declared_type='gaiaGeomCollPtr' type='^{gaiaGeomCollStruct=icc*LL^{gaiaPointStruct}^{gaiaPointStruct}^{gaiaLinestringStruct}^{gaiaLinestringStruct}^{gaiaPolygonStruct}^{gaiaPolygonStruct}ddddii^{gaiaGeomCollStruct}}' type64='^{gaiaGeomCollStruct=icc*QQ^{gaiaPointStruct}^{gaiaPointStruct}^{gaiaLinestringStruct}^{gaiaLinestringStruct}^{gaiaPolygonStruct}^{gaiaPolygonStruct}ddddii^{gaiaGeomCollStruct}}'/>
 </function>
 <function name='gaiaPrependPointMToDynamicLine'>
 <arg declared_type='gaiaDynamicLinePtr' name='p' type='^{gaiaDynamicLineStruct=ii^{gaiaPointStruct}^{gaiaPointStruct}}'/>
@@ -7173,7 +7188,7 @@
 <retval declared_type='int' type='i'/>
 </function>
 <function name='gaiaReadNetworkFromDBMS'>
-<arg declared_type='int*' name='handle' type='^i'/>
+<arg declared_type='sqlite3*' name='handle' type='^{sqlite3=}'/>
 <arg const='true' declared_type='char*' name='net_name' type='*'/>
 <arg declared_type='char**' name='network_name' type='^*'/>
 <arg declared_type='int*' name='spatial' type='^i'/>
@@ -7196,7 +7211,7 @@
 <retval declared_type='int' type='i'/>
 </function>
 <function name='gaiaReadTopologyFromDBMS'>
-<arg declared_type='int*' name='handle' type='^i'/>
+<arg declared_type='sqlite3*' name='handle' type='^{sqlite3=}'/>
 <arg const='true' declared_type='char*' name='topo_name' type='*'/>
 <arg declared_type='char**' name='topology_name' type='^*'/>
 <arg declared_type='int*' name='srid' type='^i'/>
@@ -7212,32 +7227,32 @@
 </function>
 <function name='gaiaRemEdgeModFace'>
 <arg declared_type='GaiaTopologyAccessorPtr' name='ptr' type='^{gaia_topology_accessor=}'/>
-<arg declared_type='int' name='edge_id' type='i'/>
-<retval declared_type='int' type='i'/>
+<arg declared_type='sqlite3_int64' name='edge_id' type='q'/>
+<retval declared_type='sqlite3_int64' type='q'/>
 </function>
 <function name='gaiaRemEdgeNewFace'>
 <arg declared_type='GaiaTopologyAccessorPtr' name='ptr' type='^{gaia_topology_accessor=}'/>
-<arg declared_type='int' name='edge_id' type='i'/>
-<retval declared_type='int' type='i'/>
+<arg declared_type='sqlite3_int64' name='edge_id' type='q'/>
+<retval declared_type='sqlite3_int64' type='q'/>
 </function>
 <function name='gaiaRemIsoEdge'>
 <arg declared_type='GaiaTopologyAccessorPtr' name='ptr' type='^{gaia_topology_accessor=}'/>
-<arg declared_type='int' name='edge' type='i'/>
+<arg declared_type='sqlite3_int64' name='edge' type='q'/>
 <retval declared_type='int' type='i'/>
 </function>
 <function name='gaiaRemIsoNetNode'>
 <arg declared_type='GaiaNetworkAccessorPtr' name='ptr' type='^{gaia_network_accessor=}'/>
-<arg declared_type='int' name='node' type='i'/>
+<arg declared_type='sqlite3_int64' name='node' type='q'/>
 <retval declared_type='int' type='i'/>
 </function>
 <function name='gaiaRemIsoNode'>
 <arg declared_type='GaiaTopologyAccessorPtr' name='ptr' type='^{gaia_topology_accessor=}'/>
-<arg declared_type='int' name='node' type='i'/>
+<arg declared_type='sqlite3_int64' name='node' type='q'/>
 <retval declared_type='int' type='i'/>
 </function>
 <function name='gaiaRemoveLink'>
 <arg declared_type='GaiaNetworkAccessorPtr' name='ptr' type='^{gaia_network_accessor=}'/>
-<arg declared_type='int' name='link' type='i'/>
+<arg declared_type='sqlite3_int64' name='link' type='q'/>
 <retval declared_type='int' type='i'/>
 </function>
 <function name='gaiaRemoveRepeatedPoints'>
@@ -7463,9 +7478,9 @@
 <retval declared_type='gaiaGeomCollPtr' type='^{gaiaGeomCollStruct=icc*LL^{gaiaPointStruct}^{gaiaPointStruct}^{gaiaLinestringStruct}^{gaiaLinestringStruct}^{gaiaPolygonStruct}^{gaiaPolygonStruct}ddddii^{gaiaGeomCollStruct}}' type64='^{gaiaGeomCollStruct=icc*QQ^{gaiaPointStruct}^{gaiaPointStruct}^{gaiaLinestringStruct}^{gaiaLinestringStruct}^{gaiaPolygonStruct}^{gaiaPolygonStruct}ddddii^{gaiaGeomCollStruct}}'/>
 </function>
 <function name='gaiaSpatialite2GPKG'>
-<arg declared_type='sqlite3*' name='handle_in' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='handle_in' type='^i'/>
 <arg const='true' declared_type='char*' name='splite_in_path' type='*'/>
-<arg declared_type='sqlite3*' name='handle_out' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='handle_out' type='^i'/>
 <arg const='true' declared_type='char*' name='gpkg_out_path' type='*'/>
 <retval declared_type='int' type='i'/>
 </function>
@@ -7505,7 +7520,7 @@
 <retval declared_type='gaiaGeomCollPtr' type='^{gaiaGeomCollStruct=icc*LL^{gaiaPointStruct}^{gaiaPointStruct}^{gaiaLinestringStruct}^{gaiaLinestringStruct}^{gaiaPolygonStruct}^{gaiaPolygonStruct}ddddii^{gaiaGeomCollStruct}}' type64='^{gaiaGeomCollStruct=icc*QQ^{gaiaPointStruct}^{gaiaPointStruct}^{gaiaLinestringStruct}^{gaiaLinestringStruct}^{gaiaPolygonStruct}^{gaiaPolygonStruct}ddddii^{gaiaGeomCollStruct}}'/>
 </function>
 <function name='gaiaStatisticsInvalidate'>
-<arg declared_type='sqlite3*' name='handle' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='handle' type='^i'/>
 <arg const='true' declared_type='char*' name='table' type='*'/>
 <arg const='true' declared_type='char*' name='geometry' type='*'/>
 <retval declared_type='int' type='i'/>
@@ -7637,15 +7652,15 @@
 </function>
 <function name='gaiaTopoGeoSnapLinestringToSeed'>
 <arg declared_type='GaiaTopologyAccessorPtr' name='ptr' type='^{gaia_topology_accessor=}'/>
-<arg declared_type='int' name='ln' type='i'/>
+<arg declared_type='gaiaGeomCollPtr' name='ln' type='^{gaiaGeomCollStruct=icc*LL^{gaiaPointStruct}^{gaiaPointStruct}^{gaiaLinestringStruct}^{gaiaLinestringStruct}^{gaiaPolygonStruct}^{gaiaPolygonStruct}ddddii^{gaiaGeomCollStruct}}' type64='^{gaiaGeomCollStruct=icc*QQ^{gaiaPointStruct}^{gaiaPointStruct}^{gaiaLinestringStruct}^{gaiaLinestringStruct}^{gaiaPolygonStruct}^{gaiaPolygonStruct}ddddii^{gaiaGeomCollStruct}}'/>
 <arg declared_type='double' name='distance' type='d'/>
-<retval declared_type='int' type='i'/>
+<retval declared_type='gaiaGeomCollPtr' type='^{gaiaGeomCollStruct=icc*LL^{gaiaPointStruct}^{gaiaPointStruct}^{gaiaLinestringStruct}^{gaiaLinestringStruct}^{gaiaPolygonStruct}^{gaiaPolygonStruct}ddddii^{gaiaGeomCollStruct}}' type64='^{gaiaGeomCollStruct=icc*QQ^{gaiaPointStruct}^{gaiaPointStruct}^{gaiaLinestringStruct}^{gaiaLinestringStruct}^{gaiaPolygonStruct}^{gaiaPolygonStruct}ddddii^{gaiaGeomCollStruct}}'/>
 </function>
 <function name='gaiaTopoGeoSnapPointToSeed'>
 <arg declared_type='GaiaTopologyAccessorPtr' name='ptr' type='^{gaia_topology_accessor=}'/>
-<arg declared_type='int' name='pt' type='i'/>
+<arg declared_type='gaiaGeomCollPtr' name='pt' type='^{gaiaGeomCollStruct=icc*LL^{gaiaPointStruct}^{gaiaPointStruct}^{gaiaLinestringStruct}^{gaiaLinestringStruct}^{gaiaPolygonStruct}^{gaiaPolygonStruct}ddddii^{gaiaGeomCollStruct}}' type64='^{gaiaGeomCollStruct=icc*QQ^{gaiaPointStruct}^{gaiaPointStruct}^{gaiaLinestringStruct}^{gaiaLinestringStruct}^{gaiaPolygonStruct}^{gaiaPolygonStruct}ddddii^{gaiaGeomCollStruct}}'/>
 <arg declared_type='double' name='distance' type='d'/>
-<retval declared_type='int' type='i'/>
+<retval declared_type='gaiaGeomCollPtr' type='^{gaiaGeomCollStruct=icc*LL^{gaiaPointStruct}^{gaiaPointStruct}^{gaiaLinestringStruct}^{gaiaLinestringStruct}^{gaiaPolygonStruct}^{gaiaPolygonStruct}ddddii^{gaiaGeomCollStruct}}' type64='^{gaiaGeomCollStruct=icc*QQ^{gaiaPointStruct}^{gaiaPointStruct}^{gaiaLinestringStruct}^{gaiaLinestringStruct}^{gaiaPolygonStruct}^{gaiaPolygonStruct}ddddii^{gaiaGeomCollStruct}}'/>
 </function>
 <function name='gaiaTopoGeoUpdateSeeds'>
 <arg declared_type='GaiaTopologyAccessorPtr' name='ptr' type='^{gaia_topology_accessor=}'/>
@@ -7654,31 +7669,31 @@
 </function>
 <function name='gaiaTopoGeo_AddLineString'>
 <arg declared_type='GaiaTopologyAccessorPtr' name='ptr' type='^{gaia_topology_accessor=}'/>
-<arg declared_type='int' name='pt' type='i'/>
+<arg declared_type='gaiaLinestringPtr' name='pt' type='^{gaiaLinestringStruct=i^dddddi^{gaiaLinestringStruct}}'/>
 <arg declared_type='double' name='tolerance' type='d'/>
-<arg declared_type='int**' name='edge_ids' type='^^i'/>
+<arg declared_type='sqlite3_int64**' name='edge_ids' type='^^q'/>
 <arg declared_type='int*' name='ids_count' type='^i'/>
 <retval declared_type='int' type='i'/>
 </function>
 <function name='gaiaTopoGeo_AddLineStringNoFace'>
 <arg declared_type='GaiaTopologyAccessorPtr' name='ptr' type='^{gaia_topology_accessor=}'/>
-<arg declared_type='int' name='pt' type='i'/>
+<arg declared_type='gaiaLinestringPtr' name='pt' type='^{gaiaLinestringStruct=i^dddddi^{gaiaLinestringStruct}}'/>
 <arg declared_type='double' name='tolerance' type='d'/>
-<arg declared_type='int**' name='edge_ids' type='^^i'/>
+<arg declared_type='sqlite3_int64**' name='edge_ids' type='^^q'/>
 <arg declared_type='int*' name='ids_count' type='^i'/>
 <retval declared_type='int' type='i'/>
 </function>
 <function name='gaiaTopoGeo_AddPoint'>
 <arg declared_type='GaiaTopologyAccessorPtr' name='ptr' type='^{gaia_topology_accessor=}'/>
-<arg declared_type='int' name='pt' type='i'/>
+<arg declared_type='gaiaPointPtr' name='pt' type='^{gaiaPointStruct=ddddi^{gaiaPointStruct}^{gaiaPointStruct}}'/>
 <arg declared_type='double' name='tolerance' type='d'/>
-<retval declared_type='int' type='i'/>
+<retval declared_type='sqlite3_int64' type='q'/>
 </function>
 <function name='gaiaTopoGeo_AddPolygon'>
 <arg declared_type='GaiaTopologyAccessorPtr' name='ptr' type='^{gaia_topology_accessor=}'/>
-<arg declared_type='int' name='pg' type='i'/>
+<arg declared_type='gaiaPolygonPtr' name='pg' type='^{gaiaPolygonStruct=^{gaiaRingStruct}i^{gaiaRingStruct}iddddi^{gaiaPolygonStruct}}'/>
 <arg declared_type='double' name='tolerance' type='d'/>
-<arg declared_type='int**' name='face_ids' type='^^i'/>
+<arg declared_type='sqlite3_int64**' name='face_ids' type='^^q'/>
 <arg declared_type='int*' name='ids_count' type='^i'/>
 <retval declared_type='int' type='i'/>
 </function>
@@ -7753,7 +7768,7 @@
 <arg declared_type='GaiaTopologyAccessorPtr' name='ptr' type='^{gaia_topology_accessor=}'/>
 <arg const='true' declared_type='char*' name='topolayer_name' type='*'/>
 <arg const='true' declared_type='char*' name='out_table' type='*'/>
-<arg declared_type='int' name='fid' type='i'/>
+<arg declared_type='sqlite3_int64' name='fid' type='q'/>
 <retval declared_type='int' type='i'/>
 </function>
 <function name='gaiaTopoGeo_LineEdgesList'>
@@ -7827,10 +7842,10 @@
 <retval declared_type='int' type='i'/>
 </function>
 <function name='gaiaTopoGeo_SubdivideLines'>
-<arg declared_type='int' name='geom' type='i'/>
+<arg declared_type='gaiaGeomCollPtr' name='geom' type='^{gaiaGeomCollStruct=icc*LL^{gaiaPointStruct}^{gaiaPointStruct}^{gaiaLinestringStruct}^{gaiaLinestringStruct}^{gaiaPolygonStruct}^{gaiaPolygonStruct}ddddii^{gaiaGeomCollStruct}}' type64='^{gaiaGeomCollStruct=icc*QQ^{gaiaPointStruct}^{gaiaPointStruct}^{gaiaLinestringStruct}^{gaiaLinestringStruct}^{gaiaPolygonStruct}^{gaiaPolygonStruct}ddddii^{gaiaGeomCollStruct}}'/>
 <arg declared_type='int' name='line_max_points' type='i'/>
 <arg declared_type='double' name='max_length' type='d'/>
-<retval declared_type='int' type='i'/>
+<retval declared_type='gaiaGeomCollPtr' type='^{gaiaGeomCollStruct=icc*LL^{gaiaPointStruct}^{gaiaPointStruct}^{gaiaLinestringStruct}^{gaiaLinestringStruct}^{gaiaPolygonStruct}^{gaiaPolygonStruct}ddddii^{gaiaGeomCollStruct}}' type64='^{gaiaGeomCollStruct=icc*QQ^{gaiaPointStruct}^{gaiaPointStruct}^{gaiaLinestringStruct}^{gaiaLinestringStruct}^{gaiaPolygonStruct}^{gaiaPolygonStruct}ddddii^{gaiaGeomCollStruct}}'/>
 </function>
 <function name='gaiaTopoGeo_ToGeoTable'>
 <arg declared_type='GaiaTopologyAccessorPtr' name='ptr' type='^{gaia_topology_accessor=}'/>
@@ -7896,14 +7911,14 @@
 </function>
 <function name='gaiaTopoSnap'>
 <arg declared_type='GaiaTopologyAccessorPtr' name='ptr' type='^{gaia_topology_accessor=}'/>
-<arg declared_type='int' name='geom' type='i'/>
+<arg declared_type='gaiaGeomCollPtr' name='geom' type='^{gaiaGeomCollStruct=icc*LL^{gaiaPointStruct}^{gaiaPointStruct}^{gaiaLinestringStruct}^{gaiaLinestringStruct}^{gaiaPolygonStruct}^{gaiaPolygonStruct}ddddii^{gaiaGeomCollStruct}}' type64='^{gaiaGeomCollStruct=icc*QQ^{gaiaPointStruct}^{gaiaPointStruct}^{gaiaLinestringStruct}^{gaiaLinestringStruct}^{gaiaPolygonStruct}^{gaiaPolygonStruct}ddddii^{gaiaGeomCollStruct}}'/>
 <arg declared_type='double' name='tolerance_snap' type='d'/>
 <arg declared_type='double' name='tolerance_removal' type='d'/>
 <arg declared_type='int' name='iterate' type='i'/>
-<retval declared_type='int' type='i'/>
+<retval declared_type='gaiaGeomCollPtr' type='^{gaiaGeomCollStruct=icc*LL^{gaiaPointStruct}^{gaiaPointStruct}^{gaiaLinestringStruct}^{gaiaLinestringStruct}^{gaiaPolygonStruct}^{gaiaPolygonStruct}ddddii^{gaiaGeomCollStruct}}' type64='^{gaiaGeomCollStruct=icc*QQ^{gaiaPointStruct}^{gaiaPointStruct}^{gaiaLinestringStruct}^{gaiaLinestringStruct}^{gaiaPolygonStruct}^{gaiaPolygonStruct}ddddii^{gaiaGeomCollStruct}}'/>
 </function>
 <function name='gaiaTopologyCreate'>
-<arg declared_type='int*' name='handle' type='^i'/>
+<arg declared_type='sqlite3*' name='handle' type='^{sqlite3=}'/>
 <arg const='true' declared_type='char*' name='topo_name' type='*'/>
 <arg declared_type='int' name='srid' type='i'/>
 <arg declared_type='double' name='tolerance' type='d'/>
@@ -7915,7 +7930,7 @@
 <retval declared_type='void' type='v'/>
 </function>
 <function name='gaiaTopologyDrop'>
-<arg declared_type='int*' name='handle' type='^i'/>
+<arg declared_type='sqlite3*' name='handle' type='^{sqlite3=}'/>
 <arg const='true' declared_type='char*' name='topo_name' type='*'/>
 <retval declared_type='int' type='i'/>
 </function>
@@ -7925,7 +7940,7 @@
 <retval declared_type='GaiaTopologyAccessorPtr' type='^{gaia_topology_accessor=}'/>
 </function>
 <function name='gaiaTopologyFromDBMS'>
-<arg declared_type='int*' name='handle' type='^i'/>
+<arg declared_type='sqlite3*' name='handle' type='^{sqlite3=}'/>
 <arg const='true' declared_type='void*' name='cache' type='^v'/>
 <arg const='true' declared_type='char*' name='topo_name' type='*'/>
 <retval declared_type='GaiaTopologyAccessorPtr' type='^{gaia_topology_accessor=}'/>
@@ -8007,21 +8022,21 @@
 <retval declared_type='void' type='v'/>
 </function>
 <function name='gaiaUpdateMetaCatalogStatistics'>
-<arg declared_type='sqlite3*' name='handle' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='handle' type='^i'/>
 <arg const='true' declared_type='char*' name='table' type='*'/>
 <arg const='true' declared_type='char*' name='column' type='*'/>
 <retval declared_type='int' type='i'/>
 </function>
 <function name='gaiaUpdateMetaCatalogStatisticsFromMaster'>
-<arg declared_type='sqlite3*' name='handle' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='handle' type='^i'/>
 <arg const='true' declared_type='char*' name='master_table' type='*'/>
 <arg const='true' declared_type='char*' name='table_name' type='*'/>
 <arg const='true' declared_type='char*' name='column_name' type='*'/>
 <retval declared_type='int' type='i'/>
 </function>
 <function name='gaiaUpdateSqlLog'>
-<arg declared_type='int*' name='sqlite' type='^i'/>
-<arg declared_type='int' name='sqllog_pk' type='i'/>
+<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg declared_type='sqlite3_int64' name='sqllog_pk' type='q'/>
 <arg declared_type='int' name='success' type='i'/>
 <arg const='true' declared_type='char*' name='errMsg' type='*'/>
 <retval declared_type='void' type='v'/>
@@ -8252,7 +8267,7 @@
 <retval declared_type='void' type='v'/>
 </function>
 <function name='gaia_create_routing'>
-<arg declared_type='sqlite3*' name='db_handle' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='db_handle' type='^i'/>
 <arg const='true' declared_type='void*' name='cache' type='^v'/>
 <arg const='true' declared_type='char*' name='routing_data_table' type='*'/>
 <arg const='true' declared_type='char*' name='virtual_routing_table' type='*'/>
@@ -8274,7 +8289,7 @@
 <retval const='true' declared_type='char*' type='*'/>
 </function>
 <function name='gaia_create_routing_nodes'>
-<arg declared_type='sqlite3*' name='db_handle' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='db_handle' type='^i'/>
 <arg const='true' declared_type='void*' name='cache' type='^v'/>
 <arg const='true' declared_type='char*' name='prefix' type='*'/>
 <arg const='true' declared_type='char*' name='table' type='*'/>
@@ -8521,13 +8536,103 @@
 <arg const='true' declared_type='char*' name='value' type='*'/>
 <retval declared_type='int' type='i'/>
 </function>
+<function name='get_wfs_base_describe_url'>
+<arg declared_type='gaiaWFScatalogPtr' name='handle' type='^{gaia_wfs_catalog=}'/>
+<retval const='true' declared_type='char*' type='*'/>
+</function>
+<function name='get_wfs_base_request_url'>
+<arg declared_type='gaiaWFScatalogPtr' name='handle' type='^{gaia_wfs_catalog=}'/>
+<retval const='true' declared_type='char*' type='*'/>
+</function>
+<function name='get_wfs_catalog_count'>
+<arg declared_type='gaiaWFScatalogPtr' name='handle' type='^{gaia_wfs_catalog=}'/>
+<retval declared_type='int' type='i'/>
+</function>
+<function name='get_wfs_catalog_item'>
+<arg declared_type='gaiaWFScatalogPtr' name='handle' type='^{gaia_wfs_catalog=}'/>
+<arg declared_type='int' name='index' type='i'/>
+<retval declared_type='gaiaWFSitemPtr' type='^{gaia_wfs_item=}'/>
+</function>
+<function name='get_wfs_describe_url'>
+<arg declared_type='gaiaWFScatalogPtr' name='handle' type='^{gaia_wfs_catalog=}'/>
+<arg const='true' declared_type='char*' name='name' type='*'/>
+<arg const='true' declared_type='char*' name='version' type='*'/>
+<retval declared_type='char*' type='*'/>
+</function>
+<function name='get_wfs_item_abstract'>
+<arg declared_type='gaiaWFSitemPtr' name='handle' type='^{gaia_wfs_item=}'/>
+<retval const='true' declared_type='char*' type='*'/>
+</function>
+<function name='get_wfs_item_name'>
+<arg declared_type='gaiaWFSitemPtr' name='handle' type='^{gaia_wfs_item=}'/>
+<retval const='true' declared_type='char*' type='*'/>
+</function>
+<function name='get_wfs_item_title'>
+<arg declared_type='gaiaWFSitemPtr' name='handle' type='^{gaia_wfs_item=}'/>
+<retval const='true' declared_type='char*' type='*'/>
+</function>
+<function name='get_wfs_keyword'>
+<arg declared_type='gaiaWFSitemPtr' name='handle' type='^{gaia_wfs_item=}'/>
+<arg declared_type='int' name='index' type='i'/>
+<retval const='true' declared_type='char*' type='*'/>
+</function>
+<function name='get_wfs_keyword_count'>
+<arg declared_type='gaiaWFSitemPtr' name='handle' type='^{gaia_wfs_item=}'/>
+<retval declared_type='int' type='i'/>
+</function>
+<function name='get_wfs_layer_srid'>
+<arg declared_type='gaiaWFSitemPtr' name='handle' type='^{gaia_wfs_item=}'/>
+<arg declared_type='int' name='index' type='i'/>
+<retval declared_type='int' type='i'/>
+</function>
+<function name='get_wfs_layer_srid_count'>
+<arg declared_type='gaiaWFSitemPtr' name='handle' type='^{gaia_wfs_item=}'/>
+<retval declared_type='int' type='i'/>
+</function>
+<function name='get_wfs_request_url'>
+<arg declared_type='gaiaWFScatalogPtr' name='handle' type='^{gaia_wfs_catalog=}'/>
+<arg const='true' declared_type='char*' name='name' type='*'/>
+<arg const='true' declared_type='char*' name='version' type='*'/>
+<arg declared_type='int' name='srid' type='i'/>
+<arg declared_type='int' name='max_features' type='i'/>
+<retval declared_type='char*' type='*'/>
+</function>
+<function name='get_wfs_schema_column'>
+<arg declared_type='gaiaWFSschemaPtr' name='handle' type='^{gaia_wfs_schema=}'/>
+<arg declared_type='int' name='index' type='i'/>
+<retval declared_type='gaiaWFScolumnPtr' type='^{gaia_wfs_column=}'/>
+</function>
+<function name='get_wfs_schema_column_count'>
+<arg declared_type='gaiaWFSschemaPtr' name='handle' type='^{gaia_wfs_schema=}'/>
+<retval declared_type='int' type='i'/>
+</function>
+<function name='get_wfs_schema_column_info'>
+<arg declared_type='gaiaWFScolumnPtr' name='handle' type='^{gaia_wfs_column=}'/>
+<arg const='true' declared_type='char**' name='name' type='^*'/>
+<arg declared_type='int*' name='type' type='^i'/>
+<arg declared_type='int*' name='nullable' type='^i'/>
+<retval declared_type='int' type='i'/>
+</function>
+<function name='get_wfs_schema_geometry_info'>
+<arg declared_type='gaiaWFSschemaPtr' name='handle' type='^{gaia_wfs_schema=}'/>
+<arg const='true' declared_type='char**' name='name' type='^*'/>
+<arg declared_type='int*' name='type' type='^i'/>
+<arg declared_type='int*' name='srid' type='^i'/>
+<arg declared_type='int*' name='dims' type='^i'/>
+<arg declared_type='int*' name='nullable' type='^i'/>
+<retval declared_type='int' type='i'/>
+</function>
+<function name='get_wfs_version'>
+<arg declared_type='gaiaWFScatalogPtr' name='handle' type='^{gaia_wfs_catalog=}'/>
+<retval const='true' declared_type='char*' type='*'/>
+</function>
 <function name='insert_epsg_srid'>
-<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='sqlite' type='^i'/>
 <arg declared_type='int' name='srid' type='i'/>
 <retval declared_type='int' type='i'/>
 </function>
 <function name='is_kml_constant'>
-<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='sqlite' type='^i'/>
 <arg declared_type='char*' name='table' type='*'/>
 <arg declared_type='char*' name='column' type='*'/>
 <retval declared_type='int' type='i'/>
@@ -8537,7 +8642,7 @@
 <retval declared_type='int' type='i'/>
 </function>
 <function name='load_XL'>
-<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='sqlite' type='^i'/>
 <arg const='true' declared_type='char*' name='path' type='*'/>
 <arg const='true' declared_type='char*' name='table' type='*'/>
 <arg declared_type='unsigned int' name='worksheetIndex' type='I'/>
@@ -8547,7 +8652,7 @@
 <retval declared_type='int' type='i'/>
 </function>
 <function name='load_dbf'>
-<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='sqlite' type='^i'/>
 <arg declared_type='char*' name='dbf_path' type='*'/>
 <arg declared_type='char*' name='table' type='*'/>
 <arg declared_type='char*' name='charset' type='*'/>
@@ -8557,7 +8662,7 @@
 <retval declared_type='int' type='i'/>
 </function>
 <function name='load_dbf_ex'>
-<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='sqlite' type='^i'/>
 <arg declared_type='char*' name='dbf_path' type='*'/>
 <arg declared_type='char*' name='table' type='*'/>
 <arg declared_type='char*' name='pk_column' type='*'/>
@@ -8568,7 +8673,7 @@
 <retval declared_type='int' type='i'/>
 </function>
 <function name='load_dbf_ex2'>
-<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='sqlite' type='^i'/>
 <arg declared_type='char*' name='dbf_path' type='*'/>
 <arg declared_type='char*' name='table' type='*'/>
 <arg declared_type='char*' name='pk_column' type='*'/>
@@ -8580,7 +8685,7 @@
 <retval declared_type='int' type='i'/>
 </function>
 <function name='load_dbf_ex3'>
-<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='sqlite' type='^i'/>
 <arg declared_type='char*' name='dbf_path' type='*'/>
 <arg declared_type='char*' name='table' type='*'/>
 <arg declared_type='char*' name='pk_column' type='*'/>
@@ -8592,8 +8697,68 @@
 <arg declared_type='char*' name='err_msg' type='*'/>
 <retval declared_type='int' type='i'/>
 </function>
-<function name='load_shapefile'>
+<function name='load_from_wfs'>
 <arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg const='true' declared_type='char*' name='path_or_url' type='*'/>
+<arg const='true' declared_type='char*' name='alt_describe_uri' type='*'/>
+<arg const='true' declared_type='char*' name='layer_name' type='*'/>
+<arg declared_type='int' name='swap_axes' type='i'/>
+<arg const='true' declared_type='char*' name='table' type='*'/>
+<arg const='true' declared_type='char*' name='pk_column_name' type='*'/>
+<arg declared_type='int' name='spatial_index' type='i'/>
+<arg declared_type='int*' name='rows' type='^i'/>
+<arg declared_type='char**' name='err_msg' type='^*'/>
+<arg declared_type='void (*)(int, void *)' function_pointer='true' name='progress_callback' type='^?'>
+<arg declared_type='int' type='i'/>
+<arg declared_type='void*' type='^v'/>
+<retval declared_type='void' type='v'/>
+</arg>
+<arg declared_type='void*' name='callback_ptr' type='^v'/>
+<retval declared_type='int' type='i'/>
+</function>
+<function name='load_from_wfs_paged'>
+<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg const='true' declared_type='char*' name='path_or_url' type='*'/>
+<arg const='true' declared_type='char*' name='alt_describe_uri' type='*'/>
+<arg const='true' declared_type='char*' name='layer_name' type='*'/>
+<arg declared_type='int' name='swap_axes' type='i'/>
+<arg const='true' declared_type='char*' name='table' type='*'/>
+<arg const='true' declared_type='char*' name='pk_column_name' type='*'/>
+<arg declared_type='int' name='spatial_index' type='i'/>
+<arg declared_type='int' name='page_size' type='i'/>
+<arg declared_type='int*' name='rows' type='^i'/>
+<arg declared_type='char**' name='err_msg' type='^*'/>
+<arg declared_type='void (*)(int, void *)' function_pointer='true' name='progress_callback' type='^?'>
+<arg declared_type='int' type='i'/>
+<arg declared_type='void*' type='^v'/>
+<retval declared_type='void' type='v'/>
+</arg>
+<arg declared_type='void*' name='callback_ptr' type='^v'/>
+<retval declared_type='int' type='i'/>
+</function>
+<function name='load_from_wfs_paged_ex'>
+<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg const='true' declared_type='char*' name='wfs_version' type='*'/>
+<arg const='true' declared_type='char*' name='path_or_url' type='*'/>
+<arg const='true' declared_type='char*' name='alt_describe_uri' type='*'/>
+<arg const='true' declared_type='char*' name='layer_name' type='*'/>
+<arg declared_type='int' name='swap_axes' type='i'/>
+<arg const='true' declared_type='char*' name='table' type='*'/>
+<arg const='true' declared_type='char*' name='pk_column_name' type='*'/>
+<arg declared_type='int' name='spatial_index' type='i'/>
+<arg declared_type='int' name='page_size' type='i'/>
+<arg declared_type='int*' name='rows' type='^i'/>
+<arg declared_type='char**' name='err_msg' type='^*'/>
+<arg declared_type='void (*)(int, void *)' function_pointer='true' name='progress_callback' type='^?'>
+<arg declared_type='int' type='i'/>
+<arg declared_type='void*' type='^v'/>
+<retval declared_type='void' type='v'/>
+</arg>
+<arg declared_type='void*' name='callback_ptr' type='^v'/>
+<retval declared_type='int' type='i'/>
+</function>
+<function name='load_shapefile'>
+<arg declared_type='int*' name='sqlite' type='^i'/>
 <arg declared_type='char*' name='shp_path' type='*'/>
 <arg declared_type='char*' name='table' type='*'/>
 <arg declared_type='char*' name='charset' type='*'/>
@@ -8608,7 +8773,7 @@
 <retval declared_type='int' type='i'/>
 </function>
 <function name='load_shapefile_ex'>
-<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='sqlite' type='^i'/>
 <arg declared_type='char*' name='shp_path' type='*'/>
 <arg declared_type='char*' name='table' type='*'/>
 <arg declared_type='char*' name='charset' type='*'/>
@@ -8625,7 +8790,7 @@
 <retval declared_type='int' type='i'/>
 </function>
 <function name='load_shapefile_ex2'>
-<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='sqlite' type='^i'/>
 <arg declared_type='char*' name='shp_path' type='*'/>
 <arg declared_type='char*' name='table' type='*'/>
 <arg declared_type='char*' name='charset' type='*'/>
@@ -8643,7 +8808,7 @@
 <retval declared_type='int' type='i'/>
 </function>
 <function name='load_shapefile_ex3'>
-<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='sqlite' type='^i'/>
 <arg declared_type='char*' name='shp_path' type='*'/>
 <arg declared_type='char*' name='table' type='*'/>
 <arg declared_type='char*' name='charset' type='*'/>
@@ -8662,33 +8827,36 @@
 <retval declared_type='int' type='i'/>
 </function>
 <function name='math_llabs'>
-<arg declared_type='sqlite3_int64' name='value' type='q'/>
-<retval declared_type='sqlite3_int64' type='q'/>
+<arg declared_type='int' name='value' type='i'/>
+<retval declared_type='int' type='i'/>
 </function>
 <function name='math_round'>
 <arg declared_type='double' name='value' type='d'/>
 <retval declared_type='double' type='d'/>
 </function>
 <function name='remove_duplicated_rows'>
-<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='sqlite' type='^i'/>
 <arg declared_type='char*' name='table' type='*'/>
 <retval declared_type='void' type='v'/>
 </function>
 <function name='remove_duplicated_rows_ex'>
-<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='sqlite' type='^i'/>
 <arg declared_type='char*' name='table' type='*'/>
 <arg declared_type='int*' name='removed' type='^i'/>
 <retval declared_type='void' type='v'/>
 </function>
 <function name='remove_duplicated_rows_ex2'>
-<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='sqlite' type='^i'/>
 <arg declared_type='char*' name='table' type='*'/>
 <arg declared_type='int*' name='removed' type='^i'/>
 <arg declared_type='int' name='transaction' type='i'/>
 <retval declared_type='void' type='v'/>
 </function>
+<function name='reset_wfs_http_connection'>
+<retval declared_type='void' type='v'/>
+</function>
 <function name='sanitize_all_geometry_columns'>
-<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='sqlite' type='^i'/>
 <arg const='true' declared_type='char*' name='tmp_prefix' type='*'/>
 <arg const='true' declared_type='char*' name='output_dir' type='*'/>
 <arg declared_type='int*' name='not_repaired' type='^i'/>
@@ -8697,7 +8865,7 @@
 </function>
 <function name='sanitize_all_geometry_columns_r'>
 <arg const='true' declared_type='void*' name='p_cache' type='^v'/>
-<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='sqlite' type='^i'/>
 <arg const='true' declared_type='char*' name='tmp_prefix' type='*'/>
 <arg const='true' declared_type='char*' name='output_dir' type='*'/>
 <arg declared_type='int*' name='not_repaired' type='^i'/>
@@ -8705,7 +8873,7 @@
 <retval declared_type='int' type='i'/>
 </function>
 <function name='sanitize_geometry_column'>
-<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='sqlite' type='^i'/>
 <arg const='true' declared_type='char*' name='table' type='*'/>
 <arg const='true' declared_type='char*' name='geom' type='*'/>
 <arg const='true' declared_type='char*' name='tmp_table' type='*'/>
@@ -8719,7 +8887,7 @@
 </function>
 <function name='sanitize_geometry_column_r'>
 <arg const='true' declared_type='void*' name='p_cache' type='^v'/>
-<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='sqlite' type='^i'/>
 <arg const='true' declared_type='char*' name='table' type='*'/>
 <arg const='true' declared_type='char*' name='geom' type='*'/>
 <arg const='true' declared_type='char*' name='tmp_table' type='*'/>
@@ -8732,12 +8900,12 @@
 <retval declared_type='int' type='i'/>
 </function>
 <function name='spatial_ref_sys_init'>
-<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='sqlite' type='^i'/>
 <arg declared_type='int' name='verbose' type='i'/>
 <retval declared_type='int' type='i'/>
 </function>
 <function name='spatial_ref_sys_init2'>
-<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='sqlite' type='^i'/>
 <arg declared_type='int' name='mode' type='i'/>
 <arg declared_type='int' name='verbose' type='i'/>
 <retval declared_type='int' type='i'/>
@@ -8761,7 +8929,7 @@
 <retval declared_type='void' type='v'/>
 </function>
 <function name='spatialite_init_ex'>
-<arg declared_type='sqlite3*' name='db_handle' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='db_handle' type='^i'/>
 <arg const='true' declared_type='void*' name='ptr' type='^v'/>
 <arg declared_type='int' name='verbose' type='i'/>
 <retval declared_type='void' type='v'/>
@@ -10290,57 +10458,57 @@
 <retval declared_type='void*' type='^v'/>
 </function>
 <function name='srid_get_axis'>
-<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='sqlite' type='^i'/>
 <arg declared_type='int' name='srid' type='i'/>
 <arg declared_type='char' name='axis' type='c'/>
 <arg declared_type='char' name='mode' type='c'/>
 <retval declared_type='char*' type='*'/>
 </function>
 <function name='srid_get_datum'>
-<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='sqlite' type='^i'/>
 <arg declared_type='int' name='srid' type='i'/>
 <retval declared_type='char*' type='*'/>
 </function>
 <function name='srid_get_prime_meridian'>
-<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='sqlite' type='^i'/>
 <arg declared_type='int' name='srid' type='i'/>
 <retval declared_type='char*' type='*'/>
 </function>
 <function name='srid_get_projection'>
-<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='sqlite' type='^i'/>
 <arg declared_type='int' name='srid' type='i'/>
 <retval declared_type='char*' type='*'/>
 </function>
 <function name='srid_get_spheroid'>
-<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='sqlite' type='^i'/>
 <arg declared_type='int' name='srid' type='i'/>
 <retval declared_type='char*' type='*'/>
 </function>
 <function name='srid_get_unit'>
-<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='sqlite' type='^i'/>
 <arg declared_type='int' name='srid' type='i'/>
 <retval declared_type='char*' type='*'/>
 </function>
 <function name='srid_has_flipped_axes'>
-<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='sqlite' type='^i'/>
 <arg declared_type='int' name='srid' type='i'/>
 <arg declared_type='int*' name='flipped' type='^i'/>
 <retval declared_type='int' type='i'/>
 </function>
 <function name='srid_is_geographic'>
-<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='sqlite' type='^i'/>
 <arg declared_type='int' name='srid' type='i'/>
 <arg declared_type='int*' name='geographic' type='^i'/>
 <retval declared_type='int' type='i'/>
 </function>
 <function name='srid_is_projected'>
-<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='sqlite' type='^i'/>
 <arg declared_type='int' name='srid' type='i'/>
 <arg declared_type='int*' name='projected' type='^i'/>
 <retval declared_type='int' type='i'/>
 </function>
 <function name='update_layer_statistics'>
-<arg declared_type='sqlite3*' name='sqlite' type='^{sqlite3=}'/>
+<arg declared_type='int*' name='sqlite' type='^i'/>
 <arg const='true' declared_type='char*' name='table' type='*'/>
 <arg const='true' declared_type='char*' name='column' type='*'/>
 <retval declared_type='int' type='i'/>
